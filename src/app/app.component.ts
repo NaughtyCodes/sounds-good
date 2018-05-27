@@ -3,6 +3,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { AudioClip } from './core/audio.model';
+import { CommonService } from './common.service';
+// import { Z_DATA_ERROR } from 'zlib';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,17 @@ import { AudioClip } from './core/audio.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public out : String;
   title = 'Sounds Good';
   document: any;
   audio: AudioClip;
   audios: AudioClip[];
 
-  constructor(@Inject(DOCUMENT) document){
+  constructor 
+  (
+      @Inject(DOCUMENT) document,
+      private commonService : CommonService
+  ){
     this.document = document;
     this.audios = [
       {src: ['assets/horse.ogg','assets/horse.mp3'], types: ['audio/ogg','audio/mpeg'], heading:'horse01'},
@@ -25,6 +32,7 @@ export class AppComponent {
       {src: ['assets/horse.ogg','assets/horse.mp3'], types: ['audio/ogg','audio/mpeg'], heading:'horse01'},
       {src: ['assets/horse.ogg','assets/horse.mp3'], types: ['audio/ogg','audio/mpeg'], heading:'horse02'}
     ];
+    this.checkPWA();
   }
 
   public isPlay:Boolean = true;
@@ -44,4 +52,15 @@ export class AppComponent {
     };
   }
 
+  checkPWA(){
+    this.commonService.getCountryList().subscribe(
+      data => {
+        this.out = data.RestResponse.result[0].name;
+      },
+      errorCode => console.log(errorCode)
+
+    );
+  }
+
+  
 }
