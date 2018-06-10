@@ -22,7 +22,8 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**"
+          "/assets/favicons/*.*",
+          "/assets/*.*"
         ],
         "urls": [
           "https://fonts.googleapis.com/**"
@@ -34,8 +35,8 @@
     {
       "name": "local-api",
       "urls": [
-        "http://localhost:8080/**",
-        "http://services.groupkt.com/**"
+        "http://localhost:4200/**",
+        "https://jsonplaceholder.typicode.com/**"
       ],
       "cacheConfig": {
         "maxSize": 100,

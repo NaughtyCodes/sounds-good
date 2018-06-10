@@ -55,7 +55,7 @@ export class AppComponent {
   checkPWA(){
     this.commonService.getCountryList().subscribe(
       data => {
-        this.out = data.RestResponse.result[0].name;
+        this.out =  data[0].email;
       },
       errorCode => console.log(errorCode)
 
